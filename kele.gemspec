@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
   #  provides a programmatic Ruby interface to make HTTP requests.
   s.add_runtime_dependency 'httparty', '~> 0.13'
+  s.add_runtime_dependency 'json', '~> 2.0', '>= 2.0.3'
 end
