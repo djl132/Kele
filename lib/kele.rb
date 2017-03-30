@@ -5,6 +5,7 @@ class Kele
 
     # add HTTP request ability
       include HTTParty
+      include JSON
       # all methods
 
       base_uri 'https://www.bloc.io/api/v1'
@@ -28,4 +29,22 @@ class Kele
           response = self.class.get(url, headers: { "authorization" => auth_token }).body
           return JSON.parse(response)
       end
+
+      def get_mentor_availability(mentor_id)
+        url = "https://www.bloc.io/api/v1/mentors/#{mentor_id}/student_availability"
+        response = self.class.get(url, headers: {"authorization" => retrieve_token})
+        # get body of data
+        json = response.body
+        #get ruby hash
+        result = JSON.parse(json)
+        return result.to_a
+      end
+
+      # def get_mentor_availability(mentor_id)
+      #   url = "https://www.bloc.io/api/v1/mentors/id/student_availability"
+      #   response = self.class.get(url, headers: {"authorization" => retrieve_token}, query: {id: mentor_id})
+      #   json = response.body
+      #   result = JSON.parse(json)
+      #   return result.to_a
+      # end
 end
