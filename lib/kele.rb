@@ -1,20 +1,21 @@
+require 'httparty'
+
 class Kele
 
     # add HTTP request ability
       include HTTParty
-      require 'pp'
+      # all methods
 
-      HTTParty.base_uri 'https://www.bloc.io/api/v1'
+      base_uri 'https://www.bloc.io/api/v1'
 
-      attr_accessor :email, :password, :options
+      attr_accessor :email, :password, :options, :token
 
       def initialize(email, password)
         @options = {body: {email: email, password: password}}
-        pp @options
 
       end
 
       def retrieve_token
-        self.class.post('https://www.bloc.io/api/v1/sessions', @options)
+        @token = self.class.post('https://www.bloc.io/api/v1/sessions', @options)
       end
 end
