@@ -1,16 +1,19 @@
 require 'httparty'
 require 'json'
+require 'roadmap'
 
 class Kele
 
     # add HTTP request ability
       include HTTParty
       include JSON
+      # INCLUDE METHODS (INSTANCE METHODS SPECRICIALLY)
+      include Roadmap
       # all methods
 
       base_uri 'https://www.bloc.io/api/v1'
 
-      attr_accessor :email, :password, :options, :auth_token
+      attr_accessor :email, :password, :options, :auth_token, :rm
 
       def initialize(email, password)
         @options = {body: {email: email, password: password}}
@@ -40,6 +43,20 @@ class Kele
         return result.to_a
       end
 
+
+
+
+      def retrieve_roadmap(roadmap_id)
+          get_roadmap(roadmap_id)
+      end
+
+
+      def retrieve_checkpoint(cp_id)
+          get_checkpoint(cp_id)
+      end
+
+
+# hwo to do is this wauy?
       # def get_mentor_availability(mentor_id)
       #   url = "https://www.bloc.io/api/v1/mentors/id/student_availability"
       #   response = self.class.get(url, headers: {"authorization" => retrieve_token}, query: {id: mentor_id})
@@ -47,4 +64,7 @@ class Kele
       #   result = JSON.parse(json)
       #   return result.to_a
       # end
+
+
+
 end
