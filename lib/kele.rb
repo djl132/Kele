@@ -18,6 +18,7 @@ class Kele
       def initialize(email, password)
         @options = {body: {email: email, password: password}}
         @auth_token = retrieve_token
+        @email = email
       end
 
 # we use it as an instance method because it retrieves a proprety that is nonstatic, but specific to each  instance
@@ -70,7 +71,7 @@ class Kele
 
       def create_message(rec, subject, text)
         url = 'https://www.bloc.io/api/v1/messages'
-        json = self.class.post(url, headers: {"authorization" => retrieve_token}, body: {"sender" => "djl132@case.edu", "recipient_id" => rec, "subject" => subject, "stripped-text" => text}).body
+        json = self.class.post(url, headers: {"authorization" => retrieve_token}, body: {"sender" => email, "recipient_id" => rec, "subject" => subject, "stripped-text" => text}).body
         puts email
         return json
 
