@@ -77,6 +77,20 @@ class Kele
 
       end
 
+      def create_submission(checkpoint)
+        
+      end
 
+
+
+
+https://www.bloc.io/api/v1/checkpoint_submissions
+Kele.post(url, headers: {authorization: k.auth_token}, body:{
+  assignment_branch: "master",
+  assignment_commit_link: "https://github.com/djl132/Kele",
+  checkpoint_id:1923,
+  comment: "this is my work",
+  enrollment_id: 23856
+}).body
 
 end
